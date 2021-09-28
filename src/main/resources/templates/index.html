@@ -1,0 +1,39 @@
+{{> inc/header}}
+
+<h1>SpringBoot TD2</h1>
+<h4>Application de messagerie</h4>
+<a href="/orga/add">
+<button class="ui secondary button">
+<i class="icon add"></i>
+ Ajoutez une orga
+</button>
+</a>
+
+
+<table class="ui  table">
+  <thead>
+    <tr>
+    <th>Id</th>
+    <th>User</th>
+    <th>Groupe</th>
+    <th>Organization</th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+  {{#organizations}}
+    <tr>
+      <td data-label="{{id}}">{{id}}</td>
+      <td data-label="{{name}}">{{name}}</td>
+      <td data-label="{{domain}}">{{domain}}</td>
+      <td data-label="{{aliases}}">{{aliases}}</td>
+      <td>	<i class="icon eye"></i>
+      		<i class="icon edit"></i>
+       		<i class="icon ban"></i></td>
+    </tr>
+    {{/organizations}}
+  </tbody>
+</table>
+
+
+
+{{> inc/footer}}
