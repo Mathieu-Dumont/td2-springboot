@@ -1,0 +1,61 @@
+{{> inc/header}}
+<div class="ui secondary segment">
+<div class="ui items">
+	<div class="item">
+		<div class="ui image"> <i class="huge edit black icon"></i></div>
+		<div class="content">
+		<div class="header"><h1>Model/organization</h1></div>
+		<div class="meta"><span class="price">Modification d'une organization</span></div>
+		</div>
+	</div>
+</div>
+</div>
+
+<table class="ui table">
+{{#organizations}}
+<tbody>
+
+  <tr>
+    <td>ID</td>
+    <td>{{id}}</td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td>{{name}}</td>
+  </tr>
+  <tr>
+    <td>Domain</td>
+    <td>{{domain}}</td>
+  </tr>
+  <tr>
+    <td>Aliases</td>
+    <td>{{aliases}}</td>
+  </tr>
+  	{{/organizations}}
+  	{{#groups}}
+  <tr>
+    <td>Groupes</td>
+    <td>{{name}}</td>
+  </tr>
+  {{/groups}}
+  <tr>
+    <td>OrganizationSetting</td>
+    <td></td>
+  </tr>
+  <tr>
+  {{#User}}
+  	<td>User</td>
+  	<td>{{id}}</td>
+  </tr>
+{{/User}}
+</tbody>
+
+</table>
+
+
+{{> inc/footer}}
+
+
+
+
+

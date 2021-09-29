@@ -21,17 +21,28 @@
   </tr></thead>
   <tbody>
   {{#organizations}}
+  <thead>
     <tr>
       <td data-label="{{id}}">{{id}}</td>
       <td data-label="{{name}}">{{name}}</td>
       <td data-label="{{domain}}">{{domain}}</td>
       <td data-label="{{aliases}}">{{aliases}}</td>
-      <td>	<i class="icon eye"></i>
-      		<i class="icon edit"></i>
-       		<i class="icon ban"></i></td>
+      <td><a class="ui icon button" href="display/{{id}}"><i class="icon eye"></i></a>	
+      		<a class="ui icon button" href="edit/{{id}}"><i class="icon edit"></i></a>
+       		<a class="ui icon red button" href="delete"><i class="icon ban"></i></a>
     </tr>
+    
     {{/organizations}}
-  </tbody>
+  </thead>
+  <tfoot>
+  <tr><th colspan="5">
+      <div class="ui right floated pagination menu icon input">
+		  <button class="ui icon button right   menu"><i class="search icon"></i></button>
+		  <input class="ui left floated pagination menu" type="text" placeholder="Search...">
+		</div>
+    </th>
+  </tr>
+  </tfoot>
 </table>
 
 

@@ -1,6 +1,27 @@
-<form action="add" method="post">
+{{> inc/header}}
+
+
+
+<form class="ui form" action="add" method="post">
+<div class="field">
+	<label>Nom :</label>
 	<input type="text" name="name" placeholder="name">
+</div>
+<div class="field">
+	<label>Nom :</label>
 	<input type="text" name="domain" placeholder="domain">
+</div>
+<div class="field">
+	<label>Nom :</label>
 	<input type="text" name="aliases" placeholder="aliases">
-	<input type="submit" value="valider">
+</div>
+	<div class="ui buttons">
+	  <button class="ui positive button">Validez</button>
+	  	<div class="or"></div>
+	  <button class="ui  button"><a href="/orga/" class="ui ">Cancel</a></button>
+	</div>
+	
 </form>
+
+
+{{> inc/footer}}

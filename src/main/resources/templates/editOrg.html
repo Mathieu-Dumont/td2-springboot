@@ -1,0 +1,37 @@
+{{> inc/header}}
+<div class="ui secondary segment">
+<div class="ui items">
+	<div class="item">
+		<div class="ui image"> <i class="huge edit black icon"></i></div>
+		<div class="content">
+		<div class="header"><h1>Model/organization</h1></div>
+		<div class="meta"><span class="price">Modification d'une organization</span></div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<form class="ui form" action="/orga/edit/{{id}}" method="post">
+{{#organizations}}
+
+<div class="field">
+	<label>Nom :</label>
+	<input type="text" name="name" value="{{name}}">
+</div>
+<div class="field">
+	<label>Domain :</label>
+	<input type="text" name="domain" value="{{domain}}">
+</div>
+<div class="field">
+	<label>aliases :</label>
+	<input type="text" name="aliases" value="{{aliases}}">
+</div>
+{{/organizations}}	
+<div class="ui segment">
+  <button class="ui positive button" type="submit">Envoyer</button>
+</div>
+
+</form>
+
+{{> inc/footer}}
