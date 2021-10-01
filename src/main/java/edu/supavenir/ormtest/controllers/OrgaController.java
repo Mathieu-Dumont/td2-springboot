@@ -40,7 +40,7 @@ public class OrgaController {
 	Groupe group = new Groupe();
 	group.setName("test");
 	group.setOrganization(orga);
-	orga.getGroupes().add(group);
+	orga.getGroups().add(group);
 	repository.saveAndFlush(orga);
 	return "orga ajoutée" + orga;
 

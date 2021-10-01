@@ -20,17 +20,28 @@ public class Organization {
     private String aliases;
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
     private List<Groupe> groups;
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<User> users;
 
     public Organization() {
 	groups = new ArrayList<Groupe>();
+	users = new ArrayList<User>();
     }
 
-    public List<Groupe> getGroupes() {
+    public List<Groupe> getGroups() {
 	return groups;
     }
 
-    public void setGroupes(List<Groupe> groupes) {
-	this.groups = groupes;
+    public void setGroups(List<Groupe> groups) {
+	this.groups = groups;
+    }
+
+    public List<User> getUsers() {
+	return users;
+    }
+
+    public void setUsers(List<User> users) {
+	this.users = users;
     }
 
     // GETTERS && SETTERS
