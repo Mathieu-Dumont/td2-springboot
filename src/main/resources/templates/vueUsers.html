@@ -1,0 +1,115 @@
+{{> /inc/header}}
+
+<v-app>
+	<v-btn primary v-on:click="LoadUsers()">Rechargez les Users</v-btn>
+	<ul>
+		<li v-for="user in users"> <% user.firstName %>
+			<span>
+			<v-btn fab x-small v-on:click="remove(user)"><v-icon x-small dark>mdi-minus</v-icon>
+			</span>
+			<span>
+			<v-btn fab x-small v-on:click="edit(user)"><v-icon x-small dark>mdi-pencil</v-icon>
+			</span>
+			<v-badge v-if="user.organization" color="green" v-bind:content="user.organization.name"></v-badge>
+			
+			<v-alert v-if="message" type="success"><% message %> </v-alert>
+			
+		</li>
+	</ul>
+	
+	<v-btn fab x-small v-on:click="test=!test">test affichage</v-btn>
+	
+	<v-form v-show="test" v-model="valid">
+		
+			    <v-container>
+			      
+			      <v-row>
+			        
+			        <v-col cols="12" md="4">
+			        	<v-text-field v-model="newUser.firstName" :rules="nameRules" :counter="10" label="First name" required></v-text-field>
+			        </v-col>
+			        
+			        <v-col cols="12" md="4">
+			        	<v-select return-object item-text="name" v-model="newUser.organization" :items="organizations" :error-messages="errors" label="Select" data-vv-name="select" required></v-select>
+			        </v-col>
+			        
+			      </v-row>
+			    
+			    </v-container>
+		
+		<v-btn :disabled="!valid" color="success" class="mr-4" @click="addUser(),test=!test"> Validate </v-btn> 
+			    
+	</v-form>
+</v-app>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.5.9/vuetify.min.js"></script>
+<script>
+
+Vue.prototype.$http = axios;
+
+var app = new Vue({
+	  el: 'v-app',
+	 
+	  vuetify: new Vuetify(),
+	 
+	  data: {
+	    users:[],
+	    organizations: [],
+	    message: null,
+	    test:null,
+	    valid: true,
+	    newUser: {firstName: "", organization:""},
+	    nameRules: [
+	        v => !!v || 'Name is required',
+	        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+	      ],
+	  },
+	  
+	  delimiters: ['<%', '%>'],
+	 
+	  
+	  mounted(){
+		this.LoadUsers();
+		this.LoadOrgas();
+	  },
+	  
+	  
+	  methods:{
+		LoadUsers(){
+			this.$http.get('/rest/users').then((response)=>{
+				this.users=response.data;
+			})
+		},
+		LoadOrgas(){
+			this.$http.get('/rest/orga').then((response)=>{
+				this.organizations=response.data;
+			})
+		},
+		remove(user){
+			this.$http.delete('/rest/users/'+user.id).then((response)=>{
+				if(response.data){
+					let index= this.users.indexOf(user);
+					this.users.splice(index,1);
+					this.message="Utilisateur "+data.name+" supprimé.";
+				}
+			})
+		},
+		edit(user){
+			this.test=true;
+			this.newUser=user;
+		},
+	    addUser(){
+	    	this.$http.post('rest/users',this.newUser).then((response)=>{
+	    		this.users.push(reponse.data);
+	    		this.test=false;
+	    	})  
+	      },
+	  }
+	})
+</script>
+{{> /inc/footer}}

@@ -1,48 +1,48 @@
 {{> inc/header}}
-<div class="ui secondary segment">
+
 <div class="ui items">
-	<div class="item">
-		<div class="ui image"> <i class="huge edit black icon"></i></div>
-		<div class="content">
-		<div class="header"><h1>Model/organization</h1></div>
-		<div class="meta"><span class="price">Modification d'une organization</span></div>
-		</div>
+  <div class="item">
+    <div class="ui image">
+    <i class="huge envelope icon"></i>
+    </div>
+    <div class="content">
+      <div class="header"><h1>SpringBoot TD numero 2</h1></div>
+      <div class="meta">
+        <span class="price">Application de messagerie</span>
+      </div>
+      </div>
 	</div>
-</div>
-</div>
+	</div>
+	
+<div class="ui segment">
+
+	<a class="ui primary button" href="/orga/add"><i class="plus icon"></i>Ajoutez une Organisation</a>
 
 <table class="ui table">
-{{#organizations}}
-<tbody>
 
-  <tr>
-    <td>ID</td>
-    <td>{{id}}</td>
+ <thead>
+    <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Domain</th>
+    <th>Aliases</th>
+    <th>Groupes</th>
+    <th>Users</th>
   </tr>
-  <tr>
-    <td>Name</td>
-    <td>{{name}}</td>
-  </tr>
-  <tr>
-    <td>Domain</td>
-    <td>{{domain}}</td>
-  </tr>
-  <tr>
-    <td>Aliases</td>
-    <td>{{aliases}}</td>
-  </tr>
-  	
-  	
-  <tr>
-    <td>Groupes</td>
-    <td>{{groups}}</td>
-  </tr>
-  <tr>
-  	<td>User</td>
-  	<td>{{user}}</td>
-  </tr>
-{{/organizations}}
-</tbody>
+<thead>
+  <tbody>
+  {{#organizations}}
+    <tr>
+    <td data-label="{{id}}">{{id}}</td>
+      <td data-label="{{name}}">{{name}}</td>
+      <td data-label="{{domain}}">{{domain}}</td>
+      <td data-label="{{aliases}}">{{aliases}}</td>
+       <td data-label="{{groups}}">{{groups}}</td>
+        <td data-label="{{users}}">{{users}}</td>
+
+   	  {{/organizations}}
+   	  
+  </tbody>
 
 </table>
 

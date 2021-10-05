@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import edu.supavenir.ormtest.models.Groupe;
 import edu.supavenir.ormtest.models.Organization;
+import edu.supavenir.ormtest.models.User;
 import edu.supavenir.ormtest.repositories.OrgaRepository;
+import edu.supavenir.ormtest.tricks.CssMessage;
 
 @Controller
 @RequestMapping("/orga/")
@@ -38,11 +41,15 @@ public class OrgaController {
     @PostMapping("add")
     public @ResponseBody String addAction(Organization orga) {
 	Groupe group = new Groupe();
-	group.setName("test");
+	group.setName("etudiant");
 	group.setOrganization(orga);
 	orga.getGroups().add(group);
+	User thomas = new User();
+	thomas.setFirstName("thomas");
+	thomas.setOrganization(orga);
+	orga.getUsers().add(thomas);
 	repository.saveAndFlush(orga);
-	return "orga ajoutée" + orga;
+	return "orga ajouté : " + orga;
 
     }
 
@@ -60,6 +67,16 @@ public class OrgaController {
 	bdOrga.setDomain(orga.getDomain());
 	bdOrga.setAliases(orga.getAliases());
 	repository.saveAndFlush(bdOrga);
+	return new RedirectView("/orga/");
+    }
+
+    @GetMapping("delete/{id}")
+    public RedirectView delete(@PathVariable int id, Model model, RedirectAttributes attrs) {
+	Organization bdorg = repository.getById(id);
+	model.addAttribute("organizations", bdorg);
+	CssMessage Suppresion = new CssMessage("SuccesFull", "error", "exclamation circle");
+	attrs.addFlashAttribute("msg", Suppresion);
+	repository.deleteById(id);
 	return new RedirectView("/orga/");
     }
 

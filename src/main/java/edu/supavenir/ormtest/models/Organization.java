@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Organization {
     @Id
@@ -19,8 +21,11 @@ public class Organization {
     private String domain;
     private String aliases;
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Groupe> groups;
+
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<User> users;
 
     public Organization() {

@@ -10,14 +10,40 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private String firstName;
+
+    public String getFirstName() {
+	return firstName;
+    }
+
+    @Override
+    public String toString() {
+	return "firstName=" + firstName;
+    }
+
+    public void setFirstName(String firstName) {
+	this.firstName = firstName;
+    }
+
+    public List<Groupe> getGroups() {
+	return groups;
+    }
+
+    public void setGroups(List<Groupe> groups) {
+	this.groups = groups;
+    }
+
     @ManyToOne
     private Organization organization;
     @ManyToMany(mappedBy = "users")
+    @JsonIgnore
     private List<Groupe> groups;
 
     public User() {
